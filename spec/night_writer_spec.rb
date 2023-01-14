@@ -21,4 +21,10 @@ RSpec.describe NightWriter do
     expect(night_writer.eng_brl_alphabet["a"]).to eq(["0.", "..", ".."])
   end
 
+  it "can iterate through message text and match alphabet letters to produce array of braille text" do
+    night_writer.read_from_write_to
+    
+    expect(night_writer.convert_letters).to eq([["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]])
+  end
+
 end

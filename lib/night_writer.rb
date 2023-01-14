@@ -38,11 +38,21 @@ class NightWriter
   def read_from_write_to
     incoming_file = File.open(@read_file, "r")
     
-    text = incoming_file.read
-    character_count = text.chars.count
+    @incoming_text = incoming_file.read
+    character_count = @incoming_text.chars.count
     puts "Created #{@write_file} contains #{character_count} characters"
 
-    File.write(@write_file, text)
+    File.write(@write_file, @incoming_text)
+  end
+
+  def convert_letters
+    message_array = @incoming_text.split("")
+    # array with string elements of letters
+
+    message_array.map do |letter|
+      eng_brl_alphabet[letter]
+    end
+    # returns array of array elements (braille) which has 3 string elements
   end
 
 
