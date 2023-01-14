@@ -17,6 +17,8 @@ RSpec.describe NightWriter do
 
     expect(night_writer.read_file).to eq('./message.txt')
     expect(night_writer.write_file).to eq('./braille.txt')
+    expect(night_writer.eng_brl_alphabet).to be_instance_of(Hash)
+    expect(night_writer.eng_brl_alphabet["a"]).to eq(["0.", "..", ".."])
   end
 
 end
