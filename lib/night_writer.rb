@@ -45,7 +45,7 @@ class NightWriter
     File.write(@write_file, @incoming_text)
   end
 
-  def convert_letters
+  def find_equivalent
     message_array = @incoming_text.split("")
     # array with string elements of letters
 
@@ -54,6 +54,11 @@ class NightWriter
     end
     # returns array of array elements (braille) which has 3 string elements
   end
+  
+  def order_braille_for_printing
+    find_equivalent.transpose
+  end
+
 
 
 end
