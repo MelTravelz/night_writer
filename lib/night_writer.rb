@@ -6,6 +6,7 @@ class NightWriter
     @read_file = ARGV[0]
     @write_file = ARGV[1]
     @eng_brl_alphabet = {
+      " " => ["..", "..", ".."],
       "a" => ["0.", "..", ".."],
       "b" => ["00", "..", ".."],
       "c" => ["0.", ".0", ".."],
@@ -42,22 +43,44 @@ class NightWriter
     character_count = @incoming_text.chars.count
     puts "Created #{@write_file} contains #{character_count} characters"
 
-    File.write(@write_file, @incoming_text)
+    File.write(@write_file, translate_message)
   end
 
-  def find_equivalent
-    message_array = @incoming_text.split("")
+  def translate_message
+    # if @character_count > 40
+    message_array = (@incoming_text).split("")
+    # message_array = ((File.open(@read_file, "r")).read).split("")
     # array with string elements of letters
+    # end
 
-    message_array.map do |letter|
+    braille_array = message_array.map do |letter|
       eng_brl_alphabet[letter]
     end
     # returns array of array elements (braille) which has 3 string elements
+    braille_array.transpose.map do |index_post_array|
+      index_post_array.join
+    end.join("\n")
+    # require 'pry'; binding.pry
+
   end
+
+
+  # def find_equivalent
+  #   message_array = @incoming_text.split("")
+  #   # array with string elements of letters
+
+  #   message_array.map do |letter|
+  #     eng_brl_alphabet[letter]
+  #   end
+  #   # returns array of array elements (braille) which has 3 string elements
+  #   order_braille_for_printing
+  # end
   
-  def order_braille_for_printing
-    find_equivalent.transpose
-  end
+  # def order_braille_for_printing
+  #   # require 'pry'; binding.pry
+  #   # find_equivalent.transpose.flatten
+  #   find_equivalent.transpose.map(&:join).join("\n")
+  # end
 
 
 
@@ -67,6 +90,6 @@ end
 # comment out when running rspec!
 # below is acting like a runner file: 
 
-# night_writer = NightWriter.new
-# night_writer.read_from_write_to
+night_writer = NightWriter.new
+night_writer.read_from_write_to
 
