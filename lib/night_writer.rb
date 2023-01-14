@@ -15,12 +15,10 @@ class NightWriter
     text = incoming_file.read
     character_count = text.chars.count
   
-    
     puts "Created #{@write_file} contains #{character_count} characters"
     # # require 'pry'; binding.pry
 
     File.write(@write_file, text)
-
   end
 end
 
