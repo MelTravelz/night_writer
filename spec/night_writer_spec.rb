@@ -36,6 +36,13 @@ RSpec.describe NightWriter do
       expect(night_writer.translate_message("abc")).to eq("0.000.\n.....0\n......")
       expect(night_writer.translate_message("a b c")).to eq("0...00..0.\n.........0\n..........")
     end
+
+    # xit "can return message if special character/capital letter is included in message.txt" do
+    #   night_writer.read_from_write_to
+    #   allow(night_writer).to receive(:read_file).and_return("Hel-lo!")
+
+    #   expect(night_writer.read_from_write_to).to eq("Your message contains invalid characters. Ensure you have ONLY lowercase english letters.")
+    # end
   end
 
   ######### ATEMPT AT HELPER METHODS - NOT WORKING ###########
