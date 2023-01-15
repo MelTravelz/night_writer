@@ -40,15 +40,13 @@ class NightWriter
 
   def read_from_write_to
     incoming_text = File.read(@read_file)
-
-    character_count = incoming_text.chars.count
-    # puts "Created #{@write_file} contains #{character_count} characters"
-    puts "Created #{@write_file} contains #{character_count} characters"
-
+    
     outgoing_translated_text = translate_message(incoming_text)
-
+    
     File.write(@write_file, outgoing_translated_text)
-
+    
+    character_count = incoming_text.chars.count
+    puts "Created #{@write_file} contains #{character_count} characters"
   end
 
 
