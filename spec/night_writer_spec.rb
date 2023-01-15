@@ -27,8 +27,6 @@ RSpec.describe NightWriter do
     it "matches eng to brl letters, orders those by index position, join arrays together for printing" do
       night_writer.read_from_write_to
 
-      # allow(night_writer).to receive(:incoming_text).and_return("a")
-
       expect(night_writer.translate_message("a")).to eq("0.\n..\n..")
     end
   end

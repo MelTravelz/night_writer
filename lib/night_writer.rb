@@ -36,6 +36,8 @@ class NightWriter
       }
   end
 
+
+
   def read_from_write_to
     incoming_text = File.read(@read_file)
 
@@ -46,6 +48,8 @@ class NightWriter
 
     File.write(@write_file, outgoing_translated_text)
   end
+
+
 
   def translate_message(incoming_text)
     message_array = incoming_text.split("")
@@ -62,15 +66,14 @@ class NightWriter
     # above is same as: find_equivalent.transpose.map(&:join).join("\n")
   end
 
-
 end
 
 ###### RUNNER #####
 # comment out when running rspec!
 # below is acting like a runner file: 
 
-night_writer = NightWriter.new
-night_writer.read_from_write_to
+# night_writer = NightWriter.new
+# night_writer.read_from_write_to
 
 
 ################ Old code in attempt to break up .translate method: 
