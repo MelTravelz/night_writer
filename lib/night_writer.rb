@@ -42,11 +42,13 @@ class NightWriter
     incoming_text = File.read(@read_file)
 
     character_count = incoming_text.chars.count
+    # puts "Created #{@write_file} contains #{character_count} characters"
     puts "Created #{@write_file} contains #{character_count} characters"
 
     outgoing_translated_text = translate_message(incoming_text)
 
     File.write(@write_file, outgoing_translated_text)
+
   end
 
 
@@ -60,12 +62,17 @@ class NightWriter
     end
     # returns array of array elements (braille) which has 3 string elements
     # "abc" => [["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]]
+    
+    braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
+      array_of_40_letters.transpose.map do |index_postition_array|
+        index_postition_array.join
+      end.join("\n")
+    end
+    #returns array of arrays of: first 40 -> index[0],[1],[2] & second 40 -> index[0],[1],[2] ...
 
-    x = braille_array.transpose.map do |index_post_array|
-      index_post_array.join
-    end.join("\n")
-    # joins each inner array to return a single string element with line breaks between "rows"
-    # reutrns => "0.000.\n.....0\n......"
+    braille_row_array.join("\n\n")
+    # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
+    
   end
 
 end
@@ -76,8 +83,8 @@ end
 
 # below is acting like a runner file: 
 
-# night_writer = NightWriter.new
-# night_writer.read_from_write_to
+night_writer = NightWriter.new
+night_writer.read_from_write_to
 
 
 
@@ -121,3 +128,11 @@ end
 #   result.compact
 # end
 # # above is same as: find_equivalent.transpose.map(&:join).join("\n")
+
+
+######### 
+  # braille_array.transpose.map do |index_post_array|
+  #   index_post_array.join
+  # end.join("\n")
+  # joins each inner array to return a single string element with line breaks between "rows"
+  # reutrns => "0.000.\n.....0\n......"
