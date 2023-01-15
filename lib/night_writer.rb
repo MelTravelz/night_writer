@@ -38,7 +38,7 @@ class NightWriter
 
 
 
-  def read_from_write_to
+  def read_eng_write_brl
     incoming_text = File.read(@read_file)
     
     outgoing_translated_text = translate_message(incoming_text)
@@ -82,7 +82,7 @@ end
 # below is acting like a runner file: 
 
 # night_writer = NightWriter.new
-# night_writer.read_from_write_to
+# night_writer.read_eng_write_brl
 
 
 

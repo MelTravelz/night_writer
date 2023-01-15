@@ -1,4 +1,5 @@
 class NightReader
+  attr_reader :eng_brl_alphabet
   attr_accessor :read_file, :write_file
 
   def initialize
@@ -44,9 +45,26 @@ class NightReader
     # File.write(@write_file, outgoing_translated_text)
     
     character_count = incoming_text.chars.count
-    puts "Created #{write_file} containing #{message.length} characters."
+    puts "Created #{@write_file} containing #{incoming_text.length} characters."
   end
 
+  def translate_message(incoming_text)
+
+    #COPIED FROM NIGHT WRITER - NEED TO REFACTOR FOR BRL -> ENG
+    # message_array = incoming_text.split("")
+
+    # braille_array = message_array.filter_map do |letter|
+    #   eng_brl_alphabet[letter]
+    # end
+
+    # braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
+    #   array_of_40_letters.transpose.map do |index_postition_array|
+    #     index_postition_array.join
+    #   end.join("\n")
+    # end
+    # braille_row_array.join("\n\n")
+
+  end
 end
 
 ###### RUNNER #####
