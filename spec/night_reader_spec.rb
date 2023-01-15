@@ -27,7 +27,9 @@ RSpec.describe NightReader do
     xit "can translate brl to eng" do
       night_reader.read_brl_write_eng
 
-      expect(night_reader.translate_message("0.\n..\n..")).to eq("a")
+      expect(night_reader.translate_brl_message("0.\n..\n..")).to eq("a")
+      expect(night_writer.translate_brl_message("0.000.\n.....0\n......")).to eq("abc")
+      expect(night_writer.translate_brl_message("0...00..0.\n.........0\n..........")).to eq("a b c")
     end
 
     # it "can print incoming text directly to the proper file" do

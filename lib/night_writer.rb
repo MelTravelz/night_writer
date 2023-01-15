@@ -45,8 +45,7 @@ class NightWriter
     
     File.write(@write_file, outgoing_translated_text)
     
-    character_count = incoming_text.chars.count
-    puts "Created #{@write_file} contains #{character_count} characters"
+    puts "Created #{@write_file} contains #{incoming_text.chars.count} characters"
   end
 
 
@@ -81,8 +80,8 @@ end
 
 # below is acting like a runner file: 
 
-# night_writer = NightWriter.new
-# night_writer.read_eng_write_brl
+night_writer = NightWriter.new
+night_writer.read_eng_write_brl
 
 
 
