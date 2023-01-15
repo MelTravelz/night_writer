@@ -37,51 +37,30 @@ class NightWriter
   end
 
   def read_from_write_to
-    incoming_file = File.open(@read_file, "r")
-    
-    @incoming_text = incoming_file.read
-    character_count = @incoming_text.chars.count
+    incoming_text = File.read(@read_file)
+
+    character_count = incoming_text.chars.count
     puts "Created #{@write_file} contains #{character_count} characters"
 
-    File.write(@write_file, translate_message)
+    outgoing_translated_text = translate_message(incoming_text)
+
+    File.write(@write_file, outgoing_translated_text)
   end
 
-  def translate_message
-    # if @character_count > 40
-    message_array = (@incoming_text).split("")
-    # message_array = ((File.open(@read_file, "r")).read).split("")
+  def translate_message(incoming_text)
+    message_array = incoming_text.split("")
     # array with string elements of letters
-    # end
 
     braille_array = message_array.map do |letter|
       eng_brl_alphabet[letter]
     end
     # returns array of array elements (braille) which has 3 string elements
+
     braille_array.transpose.map do |index_post_array|
       index_post_array.join
     end.join("\n")
-    # require 'pry'; binding.pry
-
+    # above is same as: find_equivalent.transpose.map(&:join).join("\n")
   end
-
-
-  # def find_equivalent
-  #   message_array = @incoming_text.split("")
-  #   # array with string elements of letters
-
-  #   message_array.map do |letter|
-  #     eng_brl_alphabet[letter]
-  #   end
-  #   # returns array of array elements (braille) which has 3 string elements
-  #   order_braille_for_printing
-  # end
-  
-  # def order_braille_for_printing
-  #   # require 'pry'; binding.pry
-  #   # find_equivalent.transpose.flatten
-  #   find_equivalent.transpose.map(&:join).join("\n")
-  # end
-
 
 
 end
@@ -93,3 +72,20 @@ end
 night_writer = NightWriter.new
 night_writer.read_from_write_to
 
+
+################ Old code in attempt to break up .translate method: 
+  #  def find_equivalent
+  #   message_array = @incoming_text.split("")
+  #   # array with string elements of letters
+
+  #   message_array.map do |letter|
+  #     eng_brl_alphabet[letter]
+  #   end
+  #   # returns array of array elements (braille) which has 3 string elements
+  
+  #   order_braille_for_printing
+  # end
+  
+  # def order_braille_for_printing
+  #   # find_equivalent.transpose
+  # end
