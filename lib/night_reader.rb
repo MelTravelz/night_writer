@@ -41,7 +41,6 @@ class NightReader
 
     outgoing_translated_text = translate_brl_message(incoming_text)
     
-    # File.write(@write_file, incoming_text)
     File.write(@write_file, outgoing_translated_text)
     
     puts "Created #{@write_file} containing #{outgoing_translated_text.chars.count} characters."
@@ -56,8 +55,14 @@ class NightReader
         brl_row_string.scan(/../)
       end
     end
-    #returns [["0.", "0.", "00"], ["..", "0.", ".."], ["..", "..", ".."]]
-
+    #returns [["0.", "..", "00", "..", "0."], ["..", "..", "..", "..", ".0"], ["..", "..", "..", "..", ".."]]
+    
+    eng_message = brl_row_array_by_index.transpose.map do |index_position_array|
+      eng_brl_alphabet.key(index_position_array)
+    end.join
+    #returns "a b c"
+    
+    require 'pry'; binding.pry
 
     #COPIED FROM NIGHT WRITER - NEED TO REFACTOR FOR BRL -> ENG
     # braille_array = message_array.filter_map do |letter|
@@ -80,5 +85,5 @@ end
 
 # below is acting like a runner file: 
 
-night_reader = NightReader.new
-night_reader.read_brl_write_eng
+# night_reader = NightReader.new
+# night_reader.read_brl_write_eng
