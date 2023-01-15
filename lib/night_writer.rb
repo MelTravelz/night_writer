@@ -54,17 +54,23 @@ class NightWriter
   def translate_message(incoming_text)
     message_array = incoming_text.split("")
     # array with string elements of letters
+    braille_array = find_equivalent(message_array)
+    order_braille_for_printing(braille_array)
+  end
 
-    braille_array = message_array.filter_map do |letter|
+  def find_equivalent(message_array)
+    message_array.filter_map do |letter|
       eng_brl_alphabet[letter]
     end
-    # returns array of array elements (braille) which has 3 string elements
+  end
+  # returns array of array elements (braille) which has 3 string elements
 
+  def order_braille_for_printing(braille_array)
     braille_array.transpose.map do |index_post_array|
       index_post_array.join
     end.join("\n")
-    # above is same as: find_equivalent.transpose.map(&:join).join("\n")
   end
+  # above is same as: find_equivalent.transpose.map(&:join).join("\n")
 
 end
 
@@ -74,21 +80,3 @@ end
 
 night_writer = NightWriter.new
 night_writer.read_from_write_to
-
-
-################ Old code in attempt to break up .translate method: 
-  #  def find_equivalent
-  #   message_array = @incoming_text.split("")
-  #   # array with string elements of letters
-
-  #   message_array.map do |letter|
-  #     eng_brl_alphabet[letter]
-  #   end
-  #   # returns array of array elements (braille) which has 3 string elements
-  
-  #   order_braille_for_printing
-  # end
-  
-  # def order_braille_for_printing
-  #   # find_equivalent.transpose
-  # end
