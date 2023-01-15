@@ -38,22 +38,19 @@ class NightWriter
 
 
 
-  def read_from_write_to
+  def read_eng_write_brl
     incoming_text = File.read(@read_file)
-
-    character_count = incoming_text.chars.count
-    # puts "Created #{@write_file} contains #{character_count} characters"
-    puts "Created #{@write_file} contains #{character_count} characters"
-
-    outgoing_translated_text = translate_message(incoming_text)
-
+    
+    outgoing_translated_text = translate_eng_message(incoming_text)
+    
     File.write(@write_file, outgoing_translated_text)
-
+    
+    puts "Created #{@write_file} contains #{incoming_text.chars.count} characters"
   end
 
 
 
-  def translate_message(incoming_text)
+  def translate_eng_message(incoming_text)
     message_array = incoming_text.split("")
 
     braille_array = message_array.filter_map do |letter|
@@ -83,8 +80,8 @@ end
 
 # below is acting like a runner file: 
 
-night_writer = NightWriter.new
-night_writer.read_from_write_to
+# night_writer = NightWriter.new
+# night_writer.read_eng_write_brl
 
 
 
