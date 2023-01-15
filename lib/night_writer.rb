@@ -83,8 +83,8 @@ end
 
 # below is acting like a runner file: 
 
-night_writer = NightWriter.new
-night_writer.read_from_write_to
+# night_writer = NightWriter.new
+# night_writer.read_from_write_to
 
 
 
