@@ -23,24 +23,35 @@ RSpec.describe NightWriter do
     end
   end
 
-  describe "#find_equivalent" do
-    it "can iterate through message text and match alphabet letters to produce array of braille text" do
+  describe "#translate_message" do
+    it "matches eng to brl letters, orders those by index position, join arrays together for printing" do
       night_writer.read_from_write_to
+
+      # allow(night_writer).to receive(:incoming_text).and_return("a")
+
+      expect(night_writer.translate_message("a")).to eq("0.\n..\n..")
+    end
+  end
+
+
+
+  # describe "#find_equivalent" do
+  #   xit "can iterate through message text and match alphabet letters to produce array of braille text" do
+  #     night_writer.read_from_write_to
       
-      expect(night_writer.find_equivalent).to eq([["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]])
-    end
-  end
+  #     expect(night_writer.find_equivalent).to eq([["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]])
+  #   end
+  # end
 
-  describe "#order_braille_for_printing" do
-    it "orders 3 index position of braille chars into 3 arrays of printable rows " do
-      night_writer.read_from_write_to
+  # describe "#order_braille_for_printing" do
+  #   xit "orders 3 index position of braille chars into 3 arrays of printable rows " do
+  #     night_writer.read_from_write_to
 
-      expect(night_writer.order_braille_for_printing).to eq([["0.", "00", "0."], ["..", "..", ".0"], ["..", "..", ".."]])
+  #     expect(night_writer.order_braille_for_printing).to eq([["0.", "00", "0."], ["..", "..", ".0"], ["..", "..", ".."]])
 
-      # ["0.", "00", "0."]
-      # ["..", "..", ".0"]
-      # ["..", "..", ".."]
-    end
-  end
-
+  #     # ["0.", "00", "0."]
+  #     # ["..", "..", ".0"]
+  #     # ["..", "..", ".."]
+  #   end
+  # end
 end
