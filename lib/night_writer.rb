@@ -59,12 +59,13 @@ class NightWriter
       eng_brl_alphabet[letter]
     end
     # returns array of array elements (braille) which has 3 string elements
+    # "abc" => [["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]]
 
-    braille_array.transpose.map do |index_post_array|
+    x = braille_array.transpose.map do |index_post_array|
       index_post_array.join
     end.join("\n")
-    # above is same as: find_equivalent.transpose.map(&:join).join("\n")
-
+    # joins each inner array to return a single string element with line breaks between "rows"
+    # reutrns => "0.000.\n.....0\n......"
   end
 
 end
@@ -75,8 +76,8 @@ end
 
 # below is acting like a runner file: 
 
-night_writer = NightWriter.new
-night_writer.read_from_write_to
+# night_writer = NightWriter.new
+# night_writer.read_from_write_to
 
 
 

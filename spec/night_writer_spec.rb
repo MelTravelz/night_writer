@@ -34,6 +34,7 @@ RSpec.describe NightWriter do
       night_writer.read_from_write_to
 
       expect(night_writer.translate_message("abc")).to eq("0.000.\n.....0\n......")
+      expect(night_writer.translate_message("a b c")).to eq("0...00..0.\n.........0\n..........")
     end
   end
 
@@ -52,7 +53,6 @@ RSpec.describe NightWriter do
   #     night_writer.read_from_write_to
 
   #     expect(night_writer.order_braille_for_printing).to eq("0.000.\n.....0\n......")
-
   #     #index[0] => ["0.", "00", "0."]
   #     #index[1] => ["..", "..", ".0"]
   #     #index[2] => ["..", "..", ".."]
