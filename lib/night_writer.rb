@@ -55,7 +55,7 @@ class NightWriter
     message_array = incoming_text.split("")
     # array with string elements of letters
 
-    braille_array = message_array.map do |letter|
+    braille_array = message_array.filter_map do |letter|
       eng_brl_alphabet[letter]
     end
     # returns array of array elements (braille) which has 3 string elements
@@ -72,8 +72,8 @@ end
 # comment out when running rspec!
 # below is acting like a runner file: 
 
-# night_writer = NightWriter.new
-# night_writer.read_from_write_to
+night_writer = NightWriter.new
+night_writer.read_from_write_to
 
 
 ################ Old code in attempt to break up .translate method: 
