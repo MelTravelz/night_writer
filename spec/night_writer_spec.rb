@@ -23,19 +23,21 @@ RSpec.describe NightWriter do
     end
   end
 
-  describe "#translate_message" do
-    it "can print one eng letter to a brl letter" do
+  describe "#translate_eng_message" do
+    it "can translate eng to brl" do
       night_writer.read_eng_write_brl
 
-      expect(night_writer.translate_message("a")).to eq("0.\n..\n..")
+      expect(night_writer.translate_eng_message("a")).to eq("0.\n..\n..")
+      expect(night_writer.translate_eng_message("abc")).to eq("0.000.\n.....0\n......")
+      expect(night_writer.translate_eng_message("a b c")).to eq("0...00..0.\n.........0\n..........")
     end
 
-    it "can print multiple eng letters to brl letters" do
-      night_writer.read_eng_write_brl
+    # it "can print multiple eng letters to brl letters" do
+    #   night_writer.read_eng_write_brl
 
-      expect(night_writer.translate_message("abc")).to eq("0.000.\n.....0\n......")
-      expect(night_writer.translate_message("a b c")).to eq("0...00..0.\n.........0\n..........")
-    end
+    #   expect(night_writer.translate_message("abc")).to eq("0.000.\n.....0\n......")
+    #   expect(night_writer.translate_message("a b c")).to eq("0...00..0.\n.........0\n..........")
+    # end
 
     # xit "can return message if special character/capital letter is included in message.txt" do
     #   night_writer.read_eng_write_brl
