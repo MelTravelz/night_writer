@@ -24,10 +24,16 @@ RSpec.describe NightWriter do
   end
 
   describe "#translate_message" do
-    it "matches eng to brl letters, orders those by index position, join arrays together for printing" do
+    it "can print one eng letter to a brl letter" do
       night_writer.read_from_write_to
 
       expect(night_writer.translate_message("a")).to eq("0.\n..\n..")
+    end
+
+    it "can print multiple eng letters to brl letters" do
+      night_writer.read_from_write_to
+
+      expect(night_writer.translate_message("abc")).to eq("0.000.\n.....0\n......")
     end
   end
 
