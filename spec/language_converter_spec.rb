@@ -56,20 +56,27 @@ RSpec.describe LanguageConverter do
       expect(language_converter.translate_brl_to_eng("00..00..0.\n.....0...0\n00..00..00")).to eq("x y z")
     end
 
-    xit "should #create_array_of_brl_strings" do
-      expect(language_converter.create_array_of_brl_strings(incoming_brl_text)).to eq()
+    it "should #create_array_of_brl_strings" do
+      brl_text_argument = "0.0.00..00000.\n..0........0.0\n........000000"
+      expected =  ["0.0.00..00000.", "..0........0.0", "........000000"]
+      expect(language_converter.create_array_of_brl_strings(brl_text_argument)).to eq(expected)
     end
 
-    xit "should #create_no_extra_rows_array" do
-      expect(language_converter.create_no_extra_rows_array(array_of_brl_strings)).to eq()
+    it "should #create_no_extra_rows_array" do
+      extra_row_argument =  ["0.0.00..00000.", "", "..0........0.0", "", "........000000"]
+      expected =  ["0.0.00..00000.", "..0........0.0", "........000000"]
+      expect(language_converter.create_no_extra_rows_array(extra_row_argument)).to eq(expected)
     end
 
-    xit "should #create_brl_row_by_index_array" do
-      expect(language_converter.create_brl_row_by_index_array(no_extra_rows_array)).to eq()
+    it "should #create_brl_row_by_index_array" do
+      no_extra_rows_argument =  ["0.0.00..00000.", "..0........0.0", "........000000"]
+      expected = [ [ ["0.", "0.", "00", "..", "00", "00", "0."],["..", "0.", "..", "..", "..", ".0", ".0"],["..", "..", "..", "..", "00", "00", "00"] ] ]
+      expect(language_converter.create_brl_row_by_index_array(no_extra_rows_argument)).to eq(expected)
     end
 
-    xit "create_eng_row_string(brl_row_by_index_array)" do
-      expect(language_converter.create_eng_row_string(brl_row_by_index_array)).to eq()
+    it "create_eng_row_string(brl_row_by_index_array)" do
+      triple_array_argument = [ [ ["0.", "0.", "00", "..", "00", "00", "0."],["..", "0.", "..", "..", "..", ".0", ".0"],["..", "..", "..", "..", "00", "00", "00"] ] ]
+      expect(language_converter.create_eng_row_string(triple_array_argument)).to eq("abc xyz")
     end
 
   end
