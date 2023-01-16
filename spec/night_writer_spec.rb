@@ -34,7 +34,7 @@ RSpec.describe NightWriter do
 
     # xit "can wrap brl letters to another line if over 40 eng characters in length" do
     #   expected = 
-    #   expect(night_writer.translate_message("the quick brown fox jumps over the lazy dog")).to eq(expected)
+    #   expect(night_writer.translate_eng_to_brl("the quick brown fox jumps over the lazy dog")).to eq(expected)
     # end
 
     # xit "can return message if special character/capital letter is included in message.txt" do

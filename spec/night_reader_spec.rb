@@ -6,6 +6,7 @@ RSpec.describe NightReader do
   before do
     night_reader.read_file = "./braille.txt"
     night_reader.write_file = "original_message.txt"
+    night_reader.read_brl_write_eng
   end
 
   describe "#initialize" do
@@ -14,8 +15,6 @@ RSpec.describe NightReader do
     end
 
     it "has attributes" do
-      night_reader.read_brl_write_eng
-
       expect(night_reader.read_file).to eq("./braille.txt")
       expect(night_reader.write_file).to eq("original_message.txt")
       expect(night_reader.eng_brl_alphabet).to be_instance_of(Hash)
@@ -24,13 +23,19 @@ RSpec.describe NightReader do
   end
 
   describe "#read_brl_write_eng" do
-    it "can translate brl to eng" do
-      night_reader.read_brl_write_eng
-
+    it "can translate one brl character to eng" do
       expect(night_reader.translate_brl_to_eng("0.\n..\n..")).to eq("a")
+    end
+    
+    it "can translate more than one brl character to eng" do
       expect(night_reader.translate_brl_to_eng("0.0.00\n..0...\n......")).to eq("abc")
       expect(night_reader.translate_brl_to_eng("0...0...00\n....0.....\n..........")).to eq("a b c")
     end
+
+    # xit "can wrap eng letters to another line if over 40 eng characters in length" do
+    #   expected =  
+    #   expect(night_reader.translate_brl_to_eng("the quick brown fox jumps over the lazy dog")).to eq(expected)
+    # end
 
   end
 
