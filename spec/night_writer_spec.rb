@@ -23,13 +23,13 @@ RSpec.describe NightWriter do
     end
   end
 
-  describe "#translate_eng_message" do
+  describe "#translate_eng_to_brl" do
     it "can translate eng to brl" do
       night_writer.read_eng_write_brl
 
-      expect(night_writer.translate_eng_message("a")).to eq("0.\n..\n..")
-      expect(night_writer.translate_eng_message("abc")).to eq("0.0.00\n..0...\n......")
-      expect(night_writer.translate_eng_message("a b c")).to eq("0...0...00\n....0.....\n..........")
+      expect(night_writer.translate_eng_to_brl("a")).to eq("0.\n..\n..")
+      expect(night_writer.translate_eng_to_brl("abc")).to eq("0.0.00\n..0...\n......")
+      expect(night_writer.translate_eng_to_brl("a b c")).to eq("0...0...00\n....0.....\n..........")
     end
 
     # it "can print multiple eng letters to brl letters" do

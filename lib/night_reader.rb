@@ -1,11 +1,8 @@
 require_relative "language_converter.rb"
 
 class NightReader < LanguageConverter
-  # attr_accessor :read_file, :write_file
 
   def initialize 
-    # @read_file = ARGV[0]
-    # @write_file = ARGV[1]
     super
   end
   
@@ -13,8 +10,7 @@ class NightReader < LanguageConverter
   def read_brl_write_eng
     incoming_text = File.read(@read_file)
 
-    outgoing_translated_text = translate_brl_message(incoming_text)
-    #SomeClass.translate_brl_message(incoming_text)
+    outgoing_translated_text = LanguageConverter.translate_brl_message(incoming_text)
     
     File.write(@write_file, outgoing_translated_text)
     
