@@ -3,12 +3,12 @@ require_relative "spec_helper"
 RSpec.describe LanguageConverter do 
   let(:language_converter) { LanguageConverter.new }
 
-  before do
-    language_converter.read_file = "./message.txt"
-    language_converter.write_file = "./braille.txt"
-  end
-
   describe "#initialize" do
+    before do
+      language_converter.read_file = "./message.txt"
+      language_converter.write_file = "./braille.txt"
+    end
+
     it "exists" do
       expect(language_converter).to be_instance_of(LanguageConverter)
     end
@@ -23,8 +23,13 @@ RSpec.describe LanguageConverter do
   end 
 
   describe "Translate English to Braille" do
+    before do
+      language_converter.read_file = "./message.txt"
+      language_converter.write_file = "./braille.txt"
+    end
+
     it "should #translate_eng_to_brl for one eng character" do
-      expect(night_writer.translate_eng_to_brl("a")).to eq("0.\n..\n..")
+      expect(language_converter.translate_eng_to_brl("a")).to eq("0.\n..\n..")
     end
 
     it "should #translate_eng_to_brl for more than one eng character" do
@@ -32,7 +37,7 @@ RSpec.describe LanguageConverter do
       expect(language_converter.translate_eng_to_brl("a b c")).to eq(result)
     end
 
-    it "should #translate_eng_to_brl & wrap brl letters if over 40 eng characters long" do
+    it "should #translate_eng_to_brl & wrap brl after 80 dot-characters" do
       result = ".00.0...000..0000...0.0.0..000..000.00...00.0000.0..0.0.0.0....00.0...0.0.0.00..\n"+ 
         "0000.0..00..0.......0.00.000.0..0..0..........0.0....00..000..0000.0..0....0.0..\n"+
         "0.......0.00....0.....0.0..00.....0.00....000.0.0...0.00..0...0.......0...0000..\n"+ 
@@ -74,8 +79,26 @@ RSpec.describe LanguageConverter do
   end
 
   describe "Translate Braille to English" do
-    it "should #translate_brl_to_eng" do
+    before do
+      language_converter.read_file = "./braille.txt"
+      language_converter.write_file = "./original_message.txt"
+    end
+
+    it "should #translate_brl_to_eng for one character" do
+      expect(language_converter.translate_brl_to_eng("0.\n.0\n00")).to eq("z")
+    end
+    
+    it "should #translate_brl_to_eng for more than one brl character" do
       expect(language_converter.translate_brl_to_eng("00..00..0.\n.....0...0\n00..00..00")).to eq("x y z")
+    end
+
+    it "should #translate_eng_to_brl & wrap after 40 eng characters" do
+      brl_string_argument = ".00.0...000..0000...0.0.0..000..000.00...00.0000.0..0.0.0.0....00.0...0.0.0.00..\n"+ 
+        "0000.0..00..0.......0.00.000.0..0..0..........0.0....00..000..0000.0..0....0.0..\n"+
+        "0.......0.00....0.....0.0..00.....0.00....000.0.0...0.00..0...0.......0...0000..\n"+ 
+        "\n000.00\n.0.000\n..0..."
+      result = "the quick brown fox jumps over the lazy \ndog"
+      expect(language_converter.translate_brl_to_eng(brl_string_argument)).to eq(result)
     end
 
     it "should #create_array_of_brl_strings" do
