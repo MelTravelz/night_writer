@@ -1,19 +1,15 @@
 require_relative "language_converter.rb"
 
 class NightReader < LanguageConverter
-
-  # def initialize 
-  #   super
-  # end
   
   def read_brl_write_eng
-    incoming_text = File.read(@read_file)
+    incoming_brl_text = File.read(@read_file)
 
-    outgoing_translated_text = translate_brl_to_eng(incoming_text)
+    outgoing_translated_eng_text = translate_brl_to_eng(incoming_brl_text)
     
-    File.write(@write_file, outgoing_translated_text)
+    File.write(@write_file, outgoing_translated_eng_text)
     
-    puts "Created #{@write_file} containing #{outgoing_translated_text.chars.count} characters."
+    puts "Created #{@write_file} containing #{outgoing_translated_eng_text.chars.count} characters."
   end
 
 end

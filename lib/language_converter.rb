@@ -36,54 +36,80 @@ class LanguageConverter
     }
   end
 
-  def translate_eng_to_brl(incoming_text)
-    message_array = create_message_array(incoming_text)
-    braille_array = create_brl_array(message_array)
-    braille_row_array = create_braille_row_array(braille_array)
+################# ENGLISH TO BRAILLE TRANSLATION #################
+
+  def translate_eng_to_brl(incoming_eng_text)
+    array_of_eng_strings = create_array_of_eng_strings(incoming_eng_text)
+    braille_array = create_brl_array(array_of_eng_strings)
+    braille_row_string = create_braille_row_string(braille_array)
   end
 
-  def create_message_array(incoming_text)
-    message_array = incoming_text.split("")
+################# HELPERS #################
+
+  def create_array_of_eng_strings(incoming_eng_text)
+    array_of_eng_strings = incoming_eng_text.split("")
   end
+  #=> returns ["a", " ", "b", " ", "c"]
 
-
-  def create_brl_array(message_array)
-    braille_array = message_array.filter_map do |letter|
+  def create_brl_array(array_of_eng_strings)
+    braille_array = array_of_eng_strings.filter_map do |letter| eng_brl_alphabet[letter]
       eng_brl_alphabet[letter]
     end
   end
+  #=> returns "abc" = [["0.", "..", ".."], ['0.', '..', '..'], ['00', '..', '..']]
 
-  def create_braille_row_array(braille_array)
-      braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
+  def create_braille_row_string(braille_array)
+      braille_row_string = braille_array.each_slice(40).map do |array_of_40_letters| 
       array_of_40_letters.transpose.map do |index_postition_array|
         index_postition_array.join
       end.join("\n")
     end
-    braille_row_array.join("\n\n")
+    #=> returns array of arrays of: first 40 -> index[0],[1],[2] & second 40 -> index[0],[1],[2] ...
+    braille_row_string.join("\n\n")
+  end
+  # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
+
+################# BRAILLE TO ENGLISH TRANSLATION #################
+
+  def translate_brl_to_eng(incoming_brl_text)
+    array_of_brl_strings = create_array_of_brl_strings(incoming_brl_text)
+    no_extra_rows_array = create_no_extra_rows_array(array_of_brl_strings)
+    brl_row_by_index_array = create_brl_row_by_index_array(no_extra_rows_array)
+    eng_row_string = create_eng_row_string(brl_row_by_index_array)
   end
 
+################# HELPERS #################
 
-  def translate_brl_to_eng(incoming_text)
-    brl_message_array = incoming_text.split("\n")
-    #=> returns ["0.0.00", "..0...", "......"]
+  def create_array_of_brl_strings(incoming_brl_text)
+    array_of_brl_strings = incoming_brl_text.split("\n")
+  end
+  #=> returns ["0.0.00", "..0...", "......"]
 
-    clean_brl_message = brl_message_array.reject { |row| "\n" if row == "" }
-    # replaces empty space rows with single line break
-    
-    brl_row_array_by_index = clean_brl_message.each_slice(3).map do |brl_row_array|
+  def create_no_extra_rows_array(array_of_brl_strings)
+    no_extra_rows_array = array_of_brl_strings.reject do |row| 
+      "\n" if row == "" 
+    end
+  end
+  #=> returns previous-like array but replaces empty space-rows with single line break
+
+  def create_brl_row_by_index_array (no_extra_rows_array)
+    brl_row_by_index_array = no_extra_rows_array.each_slice(3).map do |brl_row_array|
       brl_row_array.map do |brl_row_string|
         brl_row_string.scan(/../)
       end
     end
-    #returns triple array => [ [ [0],[1],[2] ], [ [0],[1],[2] ]  ]
-    
-    eng_message = brl_row_array_by_index.map do |index_position_arrays|
+  end
+  #=> returns triple array: [ [ [0],[1],[2] ], [ [0],[1],[2] ]  ]
+
+  def create_eng_row_string(brl_row_by_index_array)
+    eng_row_string = brl_row_by_index_array.map do |index_position_arrays|
       index_position_arrays.transpose.map do |index_position_rows|
         eng_brl_alphabet.key(index_position_rows)
       end
     end.join
-    eng_message.scan(/.{40}|.+/).join("\n")
-
+    #=> returns string of english characters (ex: "a b c")
+    eng_row_string.scan(/.{40}|.+/).join("\n")
   end
-
+  #=> wraps english characters (ex: "a b c") to next line after 40 characters
+  #=> good test sentence: "the quick brown fox jumps over the lazy dog"
 end

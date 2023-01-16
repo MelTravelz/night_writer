@@ -47,24 +47,4 @@ RSpec.describe NightWriter do
     # end
   end
 
-  ######### ATEMPT AT HELPER METHODS - NOT WORKING ###########
-
-  # describe "#find_equivalent" do
-  #   xit "can iterate through message text and match alphabet letters to produce array of braille text" do
-  #     night_writer.read_eng_write_brl
-      
-  #     expect(night_writer.find_equivalent("abc")).to eq([["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]])
-  #   end
-  # end
-
-  # describe "#order_braille_for_printing" do
-  #   xit "orders 3 index position of braille chars into 3 arrays of printable rows " do
-  #     night_writer.read_eng_write_brl
-
-  #     expect(night_writer.order_braille_for_printing).to eq("0.000.\n.....0\n......")
-  #     #index[0] => ["0.", "00", "0."]
-  #     #index[1] => ["..", "..", ".0"]
-  #     #index[2] => ["..", "..", ".."]
-  #   end
-  # end
 end
