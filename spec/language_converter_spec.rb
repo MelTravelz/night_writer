@@ -16,6 +16,8 @@ RSpec.describe LanguageConverter do
     it "has attributes" do
       expect(language_converter.read_file).to eq("./message.txt")
       expect(language_converter.write_file).to eq("./braille.txt")
+      
+      expect(language_converter.eng_brl_alphabet).to be_instance_of(Hash)
       expect(language_converter.eng_brl_alphabet["a"]).to eq(['0.', '..', '..'])
     end
   end 
