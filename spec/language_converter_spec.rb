@@ -28,7 +28,10 @@ RSpec.describe LanguageConverter do
     end
   end
 
-  # describe "#translate_brl_message" do
-  # end
+  describe "#translate_brl_to_eng" do
+    it "can convert a brl text into eng text" do
+      expect(language_converter.translate_brl_to_eng("00..00..0.\n.....0...0\n00..00..00")).to eq("x y z")
+    end
+  end
 end
 
