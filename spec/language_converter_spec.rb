@@ -28,6 +28,16 @@ RSpec.describe LanguageConverter do
       expect(language_converter.translate_eng_to_brl("a b c")).to eq(expected)
     end
 
+    it "should translate capital eng letters to brl" do
+      expected = "0.0.00..00000.\n..0........0.0\n........000000"
+      expect(language_converter.translate_eng_to_brl("ABC XYZ")).to eq(expected)
+    end
+
+    it "should delete all unknown characters and translate eng to brl" do
+      expected = "0.0.00..00000.\n..0........0.0\n........000000"
+      expect(language_converter.translate_eng_to_brl("abc! xyz?")).to eq(expected)
+    end
+
     it "should #create_array_of_eng_strings" do
       expected = ["a", "b", "c", " ", "x", "y", "z"]
       expect(language_converter.create_array_of_eng_strings("abc xyz")).to eq(expected)
@@ -40,6 +50,14 @@ RSpec.describe LanguageConverter do
       ]
       expect(language_converter.create_brl_array(["a", "b", "c", " ", "x", "y", "z"])).to eq(expected)
     end
+
+    # it "should also delete all nil/unknown characters within #create_brl_array" do
+    #   expected = [
+    #     ["0.", "..", ".."], ['0.', '0.', '..'], ['00', '..', '..'], ['..', '..', '..'],
+    #     ['00', '..', '00'], ['00', '.0', '00'], ['0.', '.0', '00']
+    #   ]
+    #   expect(language_converter.create_brl_array(["a", "b", "c", "!", " ", "x", "y", "z", "?"])).to eq(expected)
+    # end
 
     it "should #create_braille_row_string" do
       brl_array_argument = [

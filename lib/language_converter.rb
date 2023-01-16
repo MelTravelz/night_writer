@@ -47,12 +47,12 @@ class LanguageConverter
 ################# HELPERS #################
 
   def create_array_of_eng_strings(incoming_eng_text)
-    array_of_eng_strings = incoming_eng_text.split("")
+    array_of_eng_strings = incoming_eng_text.downcase.split("")
   end
   #=> returns ["a", " ", "b", " ", "c"]
 
   def create_brl_array(array_of_eng_strings)
-    braille_array = array_of_eng_strings.filter_map do |letter| eng_brl_alphabet[letter]
+    braille_array = array_of_eng_strings.filter_map do |letter| 
       eng_brl_alphabet[letter]
     end
   end

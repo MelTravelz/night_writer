@@ -32,10 +32,13 @@ RSpec.describe NightWriter do
     expect(night_writer.translate_eng_to_brl("a b c")).to eq("0...0...00\n....0.....\n..........")
     end
 
-    # xit "can wrap brl letters to another line if over 40 eng characters in length" do
-    #   expected = 
-    #   expect(night_writer.translate_eng_to_brl("the quick brown fox jumps over the lazy dog")).to eq(expected)
-    # end
+    it "can wrap brl letters to another line if over 40 eng characters in length" do
+      expected = ".00.0...000..0000...0.0.0..000..000.00...00.0000.0..0.0.0.0....00.0...0.0.0.00..\n"+ 
+        "0000.0..00..0.......0.00.000.0..0..0..........0.0....00..000..0000.0..0....0.0..\n"+
+        "0.......0.00....0.....0.0..00.....0.00....000.0.0...0.00..0...0.......0...0000..\n"+ 
+        "\n000.00\n.0.000\n..0..."
+      expect(night_writer.translate_eng_to_brl("the quick brown fox jumps over the lazy dog")).to eq(expected)
+    end
 
     # xit "can return message if special character/capital letter is included in message.txt" do
     #   allow(night_writer).to receive(:read_file).and_return("Hel-lo!")
