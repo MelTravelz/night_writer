@@ -28,8 +28,8 @@ RSpec.describe NightWriter do
       night_writer.read_eng_write_brl
 
       expect(night_writer.translate_eng_message("a")).to eq("0.\n..\n..")
-      expect(night_writer.translate_eng_message("abc")).to eq("0.000.\n.....0\n......")
-      expect(night_writer.translate_eng_message("a b c")).to eq("0...00..0.\n.........0\n..........")
+      expect(night_writer.translate_eng_message("abc")).to eq("0.0.00\n..0...\n......")
+      expect(night_writer.translate_eng_message("a b c")).to eq("0...0...00\n....0.....\n..........")
     end
 
     # it "can print multiple eng letters to brl letters" do
