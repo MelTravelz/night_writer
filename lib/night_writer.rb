@@ -1,11 +1,11 @@
 require_relative "language_converter.rb"
 
 class NightWriter < LanguageConverter
-  attr_accessor :read_file, :write_file
+  # attr_accessor :read_file, :write_file
 
   def initialize 
-    @read_file = ARGV[0]
-    @write_file = ARGV[1]
+    # @read_file = ARGV[0]
+    # @write_file = ARGV[1]
     super
   end
 

@@ -1,7 +1,10 @@
 class LanguageConverter
   attr_reader :eng_brl_alphabet
-  
+  attr_accessor :read_file, :write_file
+
   def initialize
+    @read_file = ARGV[0]
+    @write_file = ARGV[1]
     @eng_brl_alphabet = {
       ' ' => ['..', '..', '..'],
       'a' => ['0.', '..', '..'],
