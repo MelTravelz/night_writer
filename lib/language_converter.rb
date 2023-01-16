@@ -92,7 +92,7 @@ class LanguageConverter
   end
   #=> returns previous-like array but replaces empty space-rows with single line break
 
-  def create_brl_row_by_index_array (no_extra_rows_array)
+  def create_brl_row_by_index_array(no_extra_rows_array)
     brl_row_by_index_array = no_extra_rows_array.each_slice(3).map do |brl_row_array|
       brl_row_array.map do |brl_row_string|
         brl_row_string.scan(/../)
