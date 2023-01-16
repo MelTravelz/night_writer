@@ -37,25 +37,31 @@ class LanguageConverter
   end
 
   def translate_eng_to_brl(incoming_text)
-    message_array = incoming_text.split("")
+    message_array = create_message_array(incoming_text)
+    braille_array = create_brl_array(message_array)
+    braille_row_array = create_braille_row_array(braille_array)
+  end
 
+  def create_message_array(incoming_text)
+    message_array = incoming_text.split("")
+  end
+
+
+  def create_brl_array(message_array)
     braille_array = message_array.filter_map do |letter|
-      # message_array.map do |letter|
       eng_brl_alphabet[letter]
     end
-    # returns array of array elements (braille) which has 3 string elements
-    # "abc" => [["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]]
-    
-    braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
+  end
+
+  def create_braille_row_array(braille_array)
+      braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
       array_of_40_letters.transpose.map do |index_postition_array|
         index_postition_array.join
       end.join("\n")
     end
-    #returns array of arrays of: first 40 -> index[0],[1],[2] & second 40 -> index[0],[1],[2] ...
-
     braille_row_array.join("\n\n")
-    # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
   end
+
 
   def translate_brl_to_eng(incoming_text)
     brl_message_array = incoming_text.split("\n")
@@ -76,8 +82,8 @@ class LanguageConverter
         eng_brl_alphabet.key(index_position_rows)
       end
     end.join
-  
     eng_message.scan(/.{40}|.+/).join("\n")
+
   end
 
 end

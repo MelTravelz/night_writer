@@ -2,45 +2,19 @@ require_relative "language_converter.rb"
 
 class NightWriter < LanguageConverter
 
-  def initialize 
-    super
-  end
-
-
+  # def initialize 
+  #   super
+  # end
 
   def read_eng_write_brl
     incoming_text = File.read(@read_file)
     
-    outgoing_translated_text = LanguageConverter.translate_eng_to_brl(incoming_text)
+    outgoing_translated_text = translate_eng_to_brl(incoming_text)
     
     File.write(@write_file, outgoing_translated_text)
     
     puts "Created #{@write_file} contains #{incoming_text.chars.count} characters"
   end
-
-
-
-  # def translate_eng_to_brl(incoming_text)
-  #   message_array = incoming_text.split("")
-
-  #   braille_array = message_array.filter_map do |letter|
-  #     # message_array.map do |letter|
-  #     eng_brl_alphabet[letter]
-  #   end
-  #   # returns array of array elements (braille) which has 3 string elements
-  #   # "abc" => [["0.", "..", ".."], ["00", "..", ".."], ["0.", ".0", ".."]]
-    
-  #   braille_row_array = braille_array.each_slice(40).map do |array_of_40_letters| 
-  #     array_of_40_letters.transpose.map do |index_postition_array|
-  #       index_postition_array.join
-  #     end.join("\n")
-  #   end
-  #   #returns array of arrays of: first 40 -> index[0],[1],[2] & second 40 -> index[0],[1],[2] ...
-
-  #   braille_row_array.join("\n\n")
-  #   # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
-    
-  # end
 
 end
 
