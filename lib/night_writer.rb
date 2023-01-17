@@ -19,9 +19,14 @@ class NightWriter < LanguageConverter
   
   def print_terminal_message(outgoing_translated_brl_text)
     final_text = outgoing_translated_brl_text.delete("\n").chars.count
-    p "Created #{@write_file} containing #{(final_text / 6)} characters"
+    final_text_length = (final_text / 6)
+    puts "Created #{@write_file} containing #{(final_text / 6)} characters"
+    view_terminal_message_for_rspec(final_text_length)
   end
 
+  def view_terminal_message_for_rspec(final_text_length)
+    "Created #{@write_file} containing #{final_text_length} characters"
+  end
 end
 
 ###### RUNNER #####

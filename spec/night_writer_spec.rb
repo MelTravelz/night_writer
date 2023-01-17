@@ -45,5 +45,10 @@ RSpec.describe NightWriter do
         "\n000.00\n.0.000\n..0..."
       expect(night_writer.print_terminal_message(brl_string_argument)).to eq("Created fixture_braille.txt containing 43 characters")
     end
+
+    it "should return the #terminal_message" do
+      length_argument = 55
+      expect(night_writer.view_terminal_message_for_rspec(length_argument)).to eq("Created fixture_braille.txt containing 55 characters")
+    end
   end
 end
