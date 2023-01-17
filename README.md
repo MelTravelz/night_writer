@@ -1,5 +1,6 @@
 ### Notes to Users
 
+
 **Order of Operations**
 1) Open < message.txt > and write any message you'd like to be printed into braille
 
@@ -8,6 +9,7 @@
 
 3) Then, paste & run < ruby ./lib/night_reader.rb braille.txt original_message.txt >
   - This will create a file named < original_message.txt >
+
 
 **Order of Operations for Rspec (to check the spec files):**
 1) Go to <./lib/night_writer.rb> & comment out lines 33, 34:
