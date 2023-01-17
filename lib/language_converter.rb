@@ -69,7 +69,7 @@ class LanguageConverter
   end
   # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
 
-  ################# BRAILLE TO ENGLISH TRANSLATION #################
+################# BRAILLE TO ENGLISH TRANSLATION #################
   
   def translate_brl_to_eng(incoming_brl_text)
     array_of_brl_strings = create_array_of_brl_strings(incoming_brl_text)
