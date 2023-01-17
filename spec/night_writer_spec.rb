@@ -27,15 +27,18 @@ RSpec.describe NightWriter do
       expect(night_writer.read_eng_write_brl).to eq(terminal_statement)
     end
 
-    it "should #read_incoming_file & return string of eng characters" do
-      expect(night_writer.read_incoming_file).to eq("The quick brown fox jumps over the lazy dog.")
+    it "should #read_incoming_eng_file & return string of eng characters" do
+      expect(night_writer.read_incoming_eng_file).to eq("The quick brown fox jumps over the lazy dog.")
     end
 
     it "should #write_outgoing_translated_brl_text to new file" do
-      outgoing_brl_argurment = "00..00..0.\n.....0...0\n00..00..00"
-      night_writer.write_outgoing_translated_brl_text(outgoing_brl_argurment)
+      brl_string_result = ".00.0...000..0000...0.0.0..000..000.00...00.0000.0..0.0.0.0....00.0...0.0.0.00..\n"+ 
+        "0000.0..00..0.......0.00.000.0..0..0..........0.0....00..000..0000.0..0....0.0..\n"+
+        "0.......0.00....0.....0.0..00.....0.00....000.0.0...0.00..0...0.......0...0000..\n"+ 
+        "\n000.00\n.0.000\n..0..."
+      night_writer.write_outgoing_translated_brl_text(brl_string_result)
       read_outgoing_brl_message_result = File.read("fixture_braille.txt")
-      expect(read_outgoing_brl_message_result).to eq("00..00..0.\n.....0...0\n00..00..00")
+      expect(read_outgoing_brl_message_result).to eq(brl_string_result)
     end
 
     it "should #print_terminal_message(outgoing_translated_brl_text)" do

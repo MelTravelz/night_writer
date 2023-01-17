@@ -69,8 +69,8 @@ class LanguageConverter
   end
   # returns => ".0000...00\n00......00\n0.0.0...0.\n\n0..00.0...\n0.. ..."
 
-################# BRAILLE TO ENGLISH TRANSLATION #################
-
+  ################# BRAILLE TO ENGLISH TRANSLATION #################
+  
   def translate_brl_to_eng(incoming_brl_text)
     array_of_brl_strings = create_array_of_brl_strings(incoming_brl_text)
     no_extra_rows_array = create_no_extra_rows_array(array_of_brl_strings)
@@ -100,7 +100,7 @@ class LanguageConverter
     end
   end
   #=> returns triple array: [ [ [0],[1],[2] ], [ [0],[1],[2] ]  ]
-
+  
   def create_eng_row_string(brl_row_by_index_array)
     eng_row_string = brl_row_by_index_array.map do |index_position_arrays|
       index_position_arrays.transpose.map do |index_position_rows|
