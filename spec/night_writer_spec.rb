@@ -6,7 +6,6 @@ RSpec.describe NightWriter do
   before do
     night_writer.read_file = "fixture_message.txt"
     night_writer.write_file = "fixture_braille.txt"
-    # night_writer.read_eng_write_brl
   end
 
   describe "#initialize" do
@@ -47,12 +46,4 @@ RSpec.describe NightWriter do
       expect(night_writer.print_terminal_message(brl_string_argument)).to eq("Created fixture_braille.txt containing 43 characters")
     end
   end
-
-      # brl_string_argument = ".00.0...000..0000...0.0.0..000..000.00...00.0000.0..0.0.0.0....00.0...0.0.0.00..\n"+ 
-      #   "0000.0..00..0.......0.00.000.0..0..0..........0.0....00..000..0000.0..0....0.0..\n"+
-      #   "0.......0.00....0.....0.0..00.....0.00....000.0.0...0.00..0...0.......0...0000..\n"+ 
-      #   "\n000.00\n.0.000\n..0..."
-      # result = "the quick brown fox jumps over the lazy \ndog"
-
-
 end
