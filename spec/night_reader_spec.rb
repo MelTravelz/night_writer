@@ -39,6 +39,7 @@ RSpec.describe NightReader do
       eng_string_result = "the quick brown fox jumps over the lazy \ndog"
       night_reader.write_outgoing_translated_eng_text(eng_string_result)
       read_outgoing_brl_message_result = File.read("fixture_original_message.txt")
+      
       expect(read_outgoing_brl_message_result).to eq(eng_string_result)
     end
 

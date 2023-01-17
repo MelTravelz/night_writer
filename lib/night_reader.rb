@@ -30,10 +30,5 @@ class NightReader < LanguageConverter
 end
 
 ###### RUNNER #####
-# comment out when running rspec!
-# ruby ./lib/night_reader.rb braille.txt original_message.txt
-
-# below is acting like a runner file: 
-
-# night_reader = NightReader.new
-# night_reader.read_brl_write_eng
+night_reader = NightReader.new
+night_reader.read_brl_write_eng

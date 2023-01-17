@@ -38,6 +38,7 @@ RSpec.describe NightWriter do
         "\n000.00\n.0.000\n..0..."
       night_writer.write_outgoing_translated_brl_text(brl_string_result)
       read_outgoing_brl_message_result = File.read("fixture_braille.txt")
+      
       expect(read_outgoing_brl_message_result).to eq(brl_string_result)
     end
 
