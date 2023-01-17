@@ -3,13 +3,23 @@ require_relative "language_converter.rb"
 class NightWriter < LanguageConverter
 
   def read_eng_write_brl
-    incoming_eng_text = File.read(@read_file)
-    
+    incoming_eng_text = read_incoming_file
     outgoing_translated_brl_text = translate_eng_to_brl(incoming_eng_text)
-    
+    write_outgoing_translated_brl_text(outgoing_translated_brl_text)
+    print_terminal_message(outgoing_translated_brl_text)
+  end
+  
+  def read_incoming_file
+    File.read(@read_file)
+  end
+  
+  def write_outgoing_translated_brl_text(outgoing_translated_brl_text)
     File.write(@write_file, outgoing_translated_brl_text)
-    
-    puts "Created #{@write_file} contains #{incoming_eng_text.chars.count} characters"
+  end
+  
+  def print_terminal_message(outgoing_translated_brl_text)
+    final_text = outgoing_translated_brl_text.delete("\n").chars.count
+    p "Created #{@write_file} containing #{(final_text / 6)} characters"
   end
 
 end
@@ -22,4 +32,3 @@ end
 
 # night_writer = NightWriter.new
 # night_writer.read_eng_write_brl
-
